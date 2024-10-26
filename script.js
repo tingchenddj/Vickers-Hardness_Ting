@@ -1,51 +1,87 @@
-const square = document.getElementById('square');
-const leftGrid = document.getElementById('left-grid');
-const rightGrid = document.getElementById('right-grid');
-
-// 定义不同类型正方形的像素尺寸
-const squareSizes = {
-    normalised: 88,       // 0.440mm
-    quenched: 48,         // 0.240mm
-    quenched_tempered: 80 // 0.400mm
-};
-
-// 初始化栅格线条
-function createGridLines(gridElement) {
-    for (let i = 0; i < 5; i++) {
-        const line = document.createElement('div');
-        line.className = 'grid-line';
-        line.style.left = `${i * 30}px`; // 每条线间隔20px
-        gridElement.appendChild(line);
-    }
+/* 基础样式 */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f3f3f3;
 }
 
-// 调用函数创建左右栅格的竖线
-createGridLines(leftGrid);
-createGridLines(rightGrid);
+h1 {
+    color: #333;
+}
 
-// 更新正方形大小
-document.getElementById('square-size-select').addEventListener('change', (e) => {
-    const selectedSize = e.target.value;
-    const sizeInPx = squareSizes[selectedSize];
-    square.style.width = `${sizeInPx}px`;
-    square.style.height = `${sizeInPx}px`;
-});
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-// 旋转角度控制
-document.getElementById('rotation-slider').addEventListener('input', (e) => {
-    const rotationAngle = e.target.value;
-    square.style.transform = `translate(-50%, -50%) rotate(${rotationAngle}deg)`;
-});
+.controls {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    margin-bottom: 20px;
+}
 
-// 左侧栅格位置控制
-document.getElementById('left-grid-slider').addEventListener('input', (e) => {
-    const leftGridPosition = e.target.value;
-    leftGrid.style.left = `${150 + parseInt(leftGridPosition)}px`; // 基于容器中心移动
-});
+.measurement-area {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background-color: #eaeaea;
+    border: 1px solid #333;
+    overflow: hidden;
+}
 
-// 右侧栅格位置控制
-document.getElementById('right-grid-slider').addEventListener('input', (e) => {
-    const rightGridPosition = e.target.value;
-    rightGrid.style.left = `${150 + parseInt(rightGridPosition)}px`; // 基于容器中心移动
-});
+/* 正方形样式 */
+#square {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 88px; /* 默认大小 normalised */
+    height: 88px; /* 默认大小 normalised */
+    background-color: rgba(0, 0, 0, 0.3);
+    transform-origin: center;
+    transform: translate(-50%, -50%);
+}
 
+/* 栅格样式 */
+#left-grid, #right-grid {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+/* 左侧栅格线条样式 (黑色) */
+#left-grid .grid-line {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: black;
+}
+
+/* 右侧栅格线条样式 (蓝色) */
+#right-grid .grid-line {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background-color: blue;
+}
+
+/* 右侧栅格的短线样式 */
+.short-line {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 50%;  /* 短线高度 */
+    background-color: blue;
+}
+
+/* 短线的标注样式 */
+.grid-label {
+    position: absolute;
+    top: 10%;  /* 放置在短线下方 */
+    font-size: 12px;
+    color: blue;
+    transform: translateY(5px); /* 微调位置 */
+}
