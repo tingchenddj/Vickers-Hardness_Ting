@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vickers硬度测量 - 栅格辅助系统</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Vickers硬度测量 - 栅格辅助系统</h1>
+    <div class="container">
+        <div class="controls">
+            <label>正方形类型:</label>
+            <select id="square-size-select">
+                <option value="normalised">Normalised (0.440mm)</option>
+                <option value="quenched">Quenched (0.240mm)</option>
+                <option value="quenched_tempered">Quenched and Tempered (0.400mm)</option>
+            </select>
+            <label>旋转角度:</label>
+            <input type="range" id="rotation-slider" min="0" max="360" value="0">
+            <label>左侧栅格位置:</label>
+            <input type="range" id="left-grid-slider" min="-100" max="100" value="0">
+            <label>右侧栅格位置:</label>
+            <input type="range" id="right-grid-slider" min="-100" max="100" value="0">
+        </div>
+        <div class="measurement-area">
+            <div id="left-grid"></div>
+            <div id="square"></div>
+            <div id="right-grid"></div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
